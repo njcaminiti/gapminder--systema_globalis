@@ -13,8 +13,12 @@ tables = []
 for filename in glob.glob('*datapoints*.csv'):
     key = filename.partition('datapoints--')[2].partition('--')[0]
     data = pd.read_csv(filename)
-    data.set_index(['geo', 'time'], inplace=True)
+    data = data[data.time > 1950]
+    data = data[data.time <= 2018]
+    data = data.pivot(index='geo', columns='time')
+    data = data.stack(level=0)
     indicators[key] = data
     tables.append(data)
 
 master = pd.concat(tables)
+master = master.sort_index()
