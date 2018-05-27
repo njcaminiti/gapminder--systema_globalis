@@ -1,0 +1,1085 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Investigate\_a\_Dataset}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Investigating the Gapminder Systema Globalis
+Dataset}\label{investigating-the-gapminder-systema-globalis-dataset}
+
+\subsection{Table of Contents}\label{table-of-contents}
+
+Introduction
+
+Data Wrangling
+
+Exploratory Data Analysis
+
+     \#\# Introduction
+
+The name "Systema Globalis" is inspired by
+\href{https://en.wikipedia.org/wiki/Systema_Naturae}{Systema Naturae};
+the first systematic compilation of all living things from year 1735, by
+the Swedish Scientist Carl von Linné. The goal of Systema Globalis is to
+compile all public statistics; Social, Economic and Environmental; into
+a comparable total dataset.
+
+\subsubsection{Data}\label{data}
+
+This is the main dataset used in tools on the official Gapminder
+website. It contains local \& global statistics combined from hundreds
+of sources.
+
+For the purposes of this demonstration, we will be using the glob module
+for file manipulation, pandas and numpy for working with the data, and
+matplotlib's basic pyplot suite for visualization.
+
+\emph{This exercise is intended to illustrate the choices an analyst
+must make at each point of the data analysis process, from the initial
+data-wrangling to the final presentation of findings. The process shown
+is not being presented as an optimal route. Rather, the intent is to
+provide a realistic look at how an analyst might approach an unfamiliar
+dataset, including illustration of the potential pitfalls they may
+encounter.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}125}]:} \PY{k+kn}{import} \PY{n+nn}{glob}
+          \PY{k+kn}{import} \PY{n+nn}{re}
+          \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+     \#\# Data Wrangling
+
+The Systema Globalis data consists of longitudinal country-level data on
+over 500 indicators of social, economic, health, environmental, and
+other comparative measures. The data on each indicator is contained in
+its own csv file, organized by country (geo) and year of measurement
+(time).
+
+\subsubsection{General Properties}\label{general-properties}
+
+Due to the multi-file structure of this dataset, analysis involving more
+than one indicator requires file operations to parse, read, and merge
+the data from each target indicator. The glob module simplifies this
+process, allowing for filename 'globbing' based on wildcard searches of
+filenames. This provides one method of subsetting the files and
+extracting only the data we are interested in analyzing.
+
+For example:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Returns only the filenames of \PYZsq{}datapoint\PYZsq{} csv files containing literacy data:}
+        \PY{n}{datafiles\PYZus{}literacy} \PY{o}{=} \PY{n}{glob}\PY{o}{.}\PY{n}{glob}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{*datapoints*literacy*.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{datafiles\PYZus{}literacy}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Returns only the filenames of \PYZsq{}datapoint\PYZsq{} csv files containing energy data:}
+        \PY{n}{datafiles\PYZus{}energy} \PY{o}{=} \PY{n}{glob}\PY{o}{.}\PY{n}{glob}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{*datapoints*energy*.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{datafiles\PYZus{}energy}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['ddf--datapoints--literacy\_rate\_adult\_female\_percent\_of\_females\_ages\_15\_above--by--geo--time.csv'
+ 'ddf--datapoints--literacy\_rate\_adult\_male\_percent\_of\_males\_ages\_15\_and\_above--by--geo--time.csv'
+ 'ddf--datapoints--literacy\_rate\_adult\_total\_percent\_of\_people\_ages\_15\_and\_above--by--geo--time.csv'] 
+
+
+['ddf--datapoints--energy\_from\_solid\_biofuels\_percent--by--geo--time.csv'
+ 'ddf--datapoints--energy\_production\_per\_person--by--geo--time.csv'
+ 'ddf--datapoints--energy\_production\_total--by--geo--time.csv']
+
+    \end{Verbatim}
+
+    In the alternative, we can simply read all of the data into Python, and
+hold off on trimming it down or subsetting it until after its all been
+processed. This will be more computationally intensive than importing
+only a target subset, and would be impractical (or even impossible) with
+very large datasets, but there is a certain appeal to compiling all of
+the relevant data in a single place and while complex, this dataset is
+not so large to make this too unweildly, so an analyst may opt for this
+route even though it may bring with it some complications.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{datafiles\PYZus{}all} \PY{o}{=} \PY{n}{glob}\PY{o}{.}\PY{n}{glob}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{*datapoints*.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    The gapminder data is particularly well suited to exploratory data
+analysis because it is largely 'pre-cleaned'. Each table shares a
+uniform format, making it very easy to read in and merge the data from
+multiple indicators.
+
+While data 'wrangling' can be a complex, time-consuming process,
+especially when dealing with messy data or data from multiple sources,
+it can be accomplished here with relative ease.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} create empty dictionary into which we will read all of our data files}
+        \PY{n}{ref} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+        
+        \PY{c+c1}{\PYZsh{} loop through filenames, extracting indicator name from filename, and values from each file itself}
+        \PY{k}{for} \PY{n}{filename} \PY{o+ow}{in} \PY{n}{datafiles\PYZus{}all}\PY{p}{:}
+            \PY{n}{key} \PY{o}{=} \PY{n}{filename}\PY{o}{.}\PY{n}{partition}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datapoints\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{partition}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{filename}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} index each table by country and cast longitudinal progression to columns }
+            \PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{pivot}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{geo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} incorporate second\PYZhy{}level index (indicator name), necessary when merging multiple indicators }
+            \PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{stack}\PY{p}{(}\PY{n}{level}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+            \PY{n}{data}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{set\PYZus{}names}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{indicator}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{level}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} dictionary entry: key = indicator name, value = reformatted dataframe}
+            \PY{n}{ref}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{=} \PY{n}{data}
+\end{Verbatim}
+
+
+    We now have a reference dictionary containing the entire gapminder
+dataset. As mentioned eariler, this "everything in one place" approach
+is sub-optimal for a number of reasons, one of which will become
+apparent soon.
+
+We will finish the process by concatenating all of these individual
+tables into a single master dataframe. Again, we ensured that this would
+go smoothly by reindexing and reshaping in the previous step.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{master} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{n}{ref}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{master} \PY{o}{=} \PY{n}{master}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} let\PYZsq{}s take a look at some attributes of our master dataframe}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{column names are:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{master}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{index names are:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{master}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{names}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{shape is:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{master}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total missing values:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{master}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{non\PYZhy{}missing values:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{master}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+column names are: Int64Index([1086, 1100, 1279, 1290, 1300, 1309, 1348, 1349, 1351, 1352,
+            {\ldots}
+            2091, 2092, 2093, 2094, 2095, 2096, 2097, 2098, 2099, 2100],
+           dtype='int64', name='time', length=409)
+index names are: ['geo', 'indicator']
+shape is: (87888, 409)
+total missing values: 33046225
+non-missing values: 2899967
+
+    \end{Verbatim}
+
+    \textbf{Whoa}, this is a bit of a mess. There are datapoints going back
+all the way to the 11th century, and there are even points out into the
+future! How is that possible?
+
+Furthermore, our table contains over 33 million missing values, and
+fewer than 3 million actual values. In other words, the majority of our
+dataframe is pretty much useless.
+
+A closer look at our indicators shows that while most of the indicators
+contain observed values, some are projections. This explains the values
+for future years. We could fix this by not loading in those particular
+indicators, or by filtering our data to a specific timeframe.
+
+How about those missing values though? Let's take a closer look:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{master}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+count      409.000000
+mean      7090.383863
+std      11610.421421
+min          1.000000
+25\%         70.000000
+50\%       3874.000000
+75\%       4998.000000
+max      59140.000000
+dtype: float64
+
+    \end{Verbatim}
+
+    Ok, that explains a lot. If there were no values missing in our table,
+we would expect to see almost 88,000 observations for each year. Here we
+see that 75\% of years contain fewer than 5000 observations, that there
+is at least one year that contains only 1 single value, and that even
+the year for which we have the most information still contains almost
+30,000 missing values.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{missing observations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{} of columns}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{l+m+mi}{88000} \PY{o}{\PYZhy{}} \PY{n}{master}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} (array([  4.,   6.,   8.,   4.,  10.,   7.,   9.,  11.,  25., 325.]),
+         array([28860. , 34773.9, 40687.8, 46601.7, 52515.6, 58429.5, 64343.4,
+                70257.3, 76171.2, 82085.1, 87999. ]),
+         <a list of 10 Patch objects>)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Data Cleaning}\label{data-cleaning}
+
+In our attempt to put everything in one place, we created a HUGE but
+mostly empty dataset. The most obvious culprits based on our cursory
+look are the very early years that contain very few observations, and
+the future (projection) years which also contain relatively few
+observations.
+
+There are some less obvious complications though: 1) Countries whose
+names change 2) Countries for which very little data has been collected
+3) Indicators which only contain data for a limited timeframe
+
+These can each be addressed, whether by 1) limiting the scope of
+analysis to only certain countries, 2) certain indicators, or 3) certain
+time-periods
+
+Each of these solutions moves us away from the 'everything in one place'
+approach we were initially going for, but would also prevent the
+replication of tons of empty values.
+
+What follows are two examples of how the assembly process used earlier
+could have been modified to reduce the size of the dataframe output
+based on user-determined filtering criteria.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} Filtering by time and indicator }
+        \PY{n}{d1} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+        
+        \PY{k}{for} \PY{n}{filename} \PY{o+ow}{in} \PY{n}{datafiles\PYZus{}all}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} read in only filenames containing certain keywords}
+            \PY{k}{if} \PY{n}{re}\PY{o}{.}\PY{n}{search}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{income|cancer.deaths.*100000}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{filename}\PY{p}{)}\PY{p}{:}
+                \PY{n}{key} \PY{o}{=} \PY{n}{filename}\PY{o}{.}\PY{n}{partition}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datapoints\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{partition}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{filename}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} \PYZsq{}pre\PYZhy{}cleaning\PYZsq{} step to exclude data from earlier than 1950, and exclude projections}
+                \PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{o}{.}\PY{n}{time} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{1950}\PY{p}{]}
+                \PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{o}{.}\PY{n}{time} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{2018}\PY{p}{]} 
+                \PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{pivot}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{geo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{stack}\PY{p}{(}\PY{n}{level}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                \PY{n}{data}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{set\PYZus{}names}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{indicator}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{level}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+                \PY{n}{d1}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{=} \PY{n}{data}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Filtering by time and country}
+        \PY{n}{d2} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+        
+        \PY{k}{for} \PY{n}{filename} \PY{o+ow}{in} \PY{n}{datafiles\PYZus{}all}\PY{p}{:}
+            \PY{n}{key} \PY{o}{=} \PY{n}{filename}\PY{o}{.}\PY{n}{partition}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datapoints\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{partition}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{filename}\PY{p}{)}
+            \PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{o}{.}\PY{n}{time} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{1950}\PY{p}{]}
+            \PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{o}{.}\PY{n}{time} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{2018}\PY{p}{]} 
+            \PY{c+c1}{\PYZsh{} from each indicator, retain only the data for the following five countries}
+            \PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{geo} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{usa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{|} \PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{geo} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ger}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{|} \PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{geo} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{chi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{|}
+                            \PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{geo} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{jap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{|} \PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{geo} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{aus}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}
+            \PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{pivot}\PY{p}{(}\PY{n}{index}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{geo}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{stack}\PY{p}{(}\PY{n}{level}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+            \PY{n}{data}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{set\PYZus{}names}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{indicator}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{level}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+            \PY{n}{d2}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{=} \PY{n}{data}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} reassembling the datasets}
+         \PY{n}{t1} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{n}{d1}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{t1} \PY{o}{=} \PY{n}{t1}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{column bounds are:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{(}\PY{n}{t1}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{t1}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{shape of t1 is:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{t1}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total missing values in t1:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{t1}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{non\PYZhy{}missing values in t1:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{t1}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{t2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{n}{d2}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{t2} \PY{o}{=} \PY{n}{t2}\PY{o}{.}\PY{n}{sort\PYZus{}index}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{shape of t2 is:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{t2}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{total missing values in t2:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{t2}\PY{o}{.}\PY{n}{isna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{non\PYZhy{}missing values in t2:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{t2}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+column bounds are: (1950, 2018)
+shape of t1 is: (4547, 69)
+total missing values in t1: 199787
+non-missing values in t1: 113956 
+
+shape of t2 is: (1004, 69)
+total missing values in t2: 41420
+non-missing values in t2: 27856
+
+    \end{Verbatim}
+
+    As you can see, by limiting the data we read in during our initial sweep
+of the datafile directory, we reduced the size of our working datasets,
+and also dramatically cut down on the number of missing values we would
+now have to deal with during analysis.
+
+Of course, we could accomplish the same thing by simply subsetting our
+comprehensive (but bloated) 'master' dataset since we've already
+assembled it.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} Filtering by time and indicator}
+         
+         \PY{n}{master\PYZus{}t1} \PY{o}{=} \PY{n}{master}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1950}\PY{p}{:}\PY{l+m+mi}{2018}\PY{p}{]}\PY{o}{.}\PY{n}{filter}\PY{p}{(}\PY{n}{regex}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{income|cancer.deaths.*100000}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{master\PYZus{}t1}\PY{o}{.}\PY{n}{shape} \PY{o}{==} \PY{n}{t1}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+True
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} Filtering by time and country}
+         
+         \PY{n}{master\PYZus{}t2} \PY{o}{=} \PY{n}{master}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{usa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ger}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{chi}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{jap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{aus}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1950}\PY{p}{:}\PY{l+m+mi}{2018}\PY{p}{]}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{all}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{master\PYZus{}t2}\PY{o}{.}\PY{n}{shape} \PY{o}{==} \PY{n}{t2}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+True
+
+    \end{Verbatim}
+
+    In this case, neither approach is purely 'better' or 'worse', but as
+noted before, the performance burden of building an initial
+comprehensive dataset could be dramatic with larger multi-dimensional
+data, so pre-processing is generally preferred.
+
+For the purpose of this exercise we will create a third subset which
+contains only data for the United States going back no earlier than the
+20th century. This will be our most restrictive set thus far.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{usa} \PY{o}{=} \PY{n}{master}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{usa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{1900}\PY{p}{:}\PY{l+m+mi}{2018}\PY{p}{]}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{all}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{usa}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(504, 119)
+
+    \end{Verbatim}
+
+    As we can see, even after restricting our data to that from a single
+country, we're still left with 504 different observations for each of
+119 years. While it is nice to be able to create these subsets of data
+with relative ease, it seems that their practical value may end up being
+somewhat limited for the purposes of exploratory data analysis.
+
+The derivation of any meaningful insights will probably require looking
+at only one or two indicators at a time. Aha! Speaking of insights, now
+we should have a better idea why the folks who maintain the gapfinder
+data decided to store each indicator in its own separate table. Surely
+they understood that the data would be much easier to navigate that way!
+
+     \#\# Exploratory Data Analysis
+
+Now that we've experimented with trimming and cleaning the data, we're
+ready to move on to exploration. We'll compute statistics and create
+visualizations with the goal of identifying trends within a single
+variable over time, and then follow that up by looking for relationships
+between variables. Some exploration may be visual, and some may be
+computational.
+
+For now, we are going to take a look at a single indicator: "income per
+person, gdp per capita ppp inflation adjusted". This is a general
+indicator which can be used as a rough guide to estimating how much the
+'average' citizen of a country earns as income in a given year. This
+value is already adjusted for inflation.
+
+First we can isolate this indicator and create a new dataframe
+consisting of only its values worldwide since 1950. We will filter this
+from t1, one of our smaller subset tables which contains all indicators
+including the word 'income' and is already limited to data between 1950
+and 2018.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{incomepp} \PY{o}{=} \PY{n}{t1}\PY{o}{.}\PY{n}{filter}\PY{p}{(}\PY{n}{like}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{income\PYZus{}per\PYZus{}person\PYZus{}gdppercapita\PYZus{}ppp\PYZus{}inflation\PYZus{}adjusted}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Dropping the indicator index (since we\PYZsq{}re only looking at a single indicator right now) may make}
+         \PY{c+c1}{\PYZsh{} our data easier to manipulate}
+         \PY{n}{incomepp}\PY{o}{.}\PY{n}{index} \PY{o}{=} \PY{n}{incomepp}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{droplevel}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{incomepp}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n}{incomepp}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{legend}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{income all countries 1950\PYZhy{}1984}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n}{incomepp}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{legend}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean income all countries 1950\PYZhy{}1984}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n}{incomepp}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{usa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{jpn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{deu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{chn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A few global leaders}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(204, 69)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can see, just by looking at the graphical representation of this
+income data, that there has been a clear upward trend in individual
+wealth over the past 68 years. We can see that some of the most well-off
+countries took a major hit during the 1980s, and that on average, the
+global growth stopped during this time. We can't tell which countries
+those are just by looking at these graphs though. We'll return to this
+question later.
+
+Generally speaking, we can't tell much about individual countries by
+looking at graphs of aggregate calculations or all of our data at once.
+We are able to focus a bit more on individual countries by selecting
+only a few as we did in the third plot, but to dig a little deeper and
+explore a bit more we'll probably want to do some calculations now.
+
+\subsubsection{1) Which country's citizens have seen the largest
+increase in individual wealth (measured as income per person w/ ppp and
+inflation adjustments) over the past 68
+years?}\label{which-countrys-citizens-have-seen-the-largest-increase-in-individual-wealth-measured-as-income-per-person-w-ppp-and-inflation-adjustments-over-the-past-68-years}
+
+This is a relatively easy question to answer. In order to measure the
+increase (or decrease) in income, we simply look at the difference
+between the starting and ending points. This will give us a single value
+for each country, and we can then sort those values to determine the
+biggest 'winners' and 'losers'.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{raw\PYZus{}growth} \PY{o}{=} \PY{p}{(}\PY{n}{incomepp}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{incomepp}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{percent\PYZus{}growth} \PY{o}{=} \PY{p}{(}\PY{n}{raw\PYZus{}growth}\PY{o}{/}\PY{n}{incomepp}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{)}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{percent\PYZus{}growth}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{percent\PYZus{}growth}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{United States percent growth from 1950\PYZhy{}2018:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{round}\PY{p}{(}\PY{n}{percent\PYZus{}growth}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{usa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+geo
+qat    7450.41
+are    5548.26
+kor    4536.44
+gnq    4180.13
+chn    2888.43
+dtype: object 
+
+ geo
+hti   -25.0328
+som   -36.9107
+caf   -43.1518
+lbr   -46.5287
+cod   -52.1046
+dtype: object 
+
+
+United States percent growth from 1950-2018: 258.41
+
+    \end{Verbatim}
+
+    Wow, this is shocking! First of all, look at those gains in the top five
+countries. Remember, these are percentages, so that 4536 for Korea means
+that income has increased 45 times over. On the other hand, the citizens
+of some countries have actually experienced a DECREASE in income over
+the past 68 years. Somalia, the Central African Republic, Haiti,
+Liberia, and the Democratic Republic of the Congo experienced the worst
+negative gain out of all of the tracked countries, with income in the
+Congo decreasing by over 50\%.
+
+It would seem that individuals in Quatar, the UAE, Korea, China, and
+Equatorial Guinea have made incredible gains over the past 68 years.
+This would be an excellent jumping-off point for further investigation
+into these individual countries. Why did the top 5 do so well? Why did
+the bottom 5 do so poorly? These questions are beyond the scope of this
+exercise, but you get the idea.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{incomepp}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{qat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{are}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gnq}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{chn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{usa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cod}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Noteworthy Nations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1cdb38964a8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    In taking one more look at these countries, we observe another
+potentially interesting phenomena involving the UAE and Equatorial
+Guinea over the years from 2000 to the present day. Perhaps that can
+fuel another investigation at another time.
+
+\subsubsection{2) Which countries experienced the most significant
+downturn during the 1980s, the decade during which global average income
+seemed to stop
+growing.}\label{which-countries-experienced-the-most-significant-downturn-during-the-1980s-the-decade-during-which-global-average-income-seemed-to-stop-growing.}
+
+We can start by approaching this question just like we did the previous
+question. We want to know which countries performed the worst on our
+selected indicator for the years between 1980 and 1990. We can simply
+repeat the process to get us started:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{change\PYZus{}80} \PY{o}{=} \PY{p}{(}\PY{n}{incomepp}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1990}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{incomepp}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1980}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{change\PYZus{}80}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{change\PYZus{}80}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{The average change over this decade was:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{n+nb}{round}\PY{p}{(}\PY{n}{change\PYZus{}80}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{incomepp}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{abw}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cym}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kwt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{are}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{qat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1975}\PY{p}{:}\PY{l+m+mi}{1995}\PY{p}{]}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{title} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The biggest shifts of}\PY{l+s+s1}{\PYZsq{}}
+                                                                             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ the 80s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+geo
+kwt   -69796
+are   -66455
+qat   -59972
+brn   -46925
+sau   -41865
+dtype: object 
+ geo
+sgp    13445
+omn    13598
+lux    21331
+abw    22712
+cym    23549
+dtype: object 
+
+The average change over this decade was: -136.0
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1cdb39a1710>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The most dramatic drops were seen in Kuwait, Saudi Arabia, and Qatar.
+Individuals in those countries were much worse off than average during
+the 80s in terms of the volatility of their income. Meanwhile, incomes
+in certain other countries continued to grow.
+
+While again this would be outside of the scope of this exploration, a
+statistician might use more sophisticated techniques to identify
+'events' of this nature: time periods where fluctuation in the value of
+an indicator appear to be caused by something other than normal
+variation.
+
+For now, let us step away from this dataset and do a different type of
+analysis involving grouping, aggregation, and a simple test for
+statistical significance.
+
+    \subsubsection{3) Did the introduction of tamoxifen, a pharmaceutical
+breast cancer treatment that was FDA approved in 1978, reduce the number
+of women who died of breast cancer?
+**}\label{did-the-introduction-of-tamoxifen-a-pharmaceutical-breast-cancer-treatment-that-was-fda-approved-in-1978-reduce-the-number-of-women-who-died-of-breast-cancer}
+
+We will attempt to get some insight into this research question by
+looking at the number of women who died from breast cancer before and
+after the introduction of this particular treatment.
+
+\emph{*}The validity of this analysis depends on the assumption that FDA
+approval of a treatment is a reliable indicator of the particular
+treatment's adoption in countries other than the United States. This is
+not a reliable assumption, so it should be noted that this analysis is
+for demonstration purposes only and should not be considered a valid
+statistical test*
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{c+c1}{\PYZsh{} First, we filter out our target indicator and then drop the years in which all values are missing.}
+         \PY{c+c1}{\PYZsh{} (countries with no data will be dropped as a result of the filter operation itself)}
+         \PY{c+c1}{\PYZsh{} This will allow us to see how much data is available on this particular indicator. }
+         \PY{n}{bcancer} \PY{o}{=} \PY{n}{master}\PY{o}{.}\PY{n}{filter}\PY{p}{(}\PY{n}{regex}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{breast\PYZus{}cancer.deaths}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{all}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{bcancer}\PY{o}{.}\PY{n}{index} \PY{o}{=} \PY{n}{bcancer}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{droplevel}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{bcancer}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{bcancer}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{bcancer}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{notna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(175, 53)
+Int64Index([1950, 1951, 1952, 1953, 1954, 1955, 1956, 1957, 1958, 1959, 1960,
+            1961, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969, 1970, 1971,
+            1972, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1981, 1982,
+            1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993,
+            1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002],
+           dtype='int64', name='time')
+count    175.000000
+mean      15.880000
+std       19.410046
+min        1.000000
+25\%        1.000000
+50\%        1.000000
+75\%       35.500000
+max       53.000000
+dtype: float64
+
+    \end{Verbatim}
+
+    Ok, we have data for 1950 through 2002. That's perfect, since the drug
+was approved almost exactly halfway through that timeframe. Looks like
+we've got data from 175 countries, but over 50\% of those countries have
+only one single value. Let's get rid of those. We can't use them in our
+analysis.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{bcancer} \PY{o}{=} \PY{n}{bcancer}\PY{p}{[}\PY{n}{bcancer}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{notna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{bcancer}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{bcancer}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{notna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(75, 53)
+count    75.000000
+mean     35.720000
+std      13.701016
+min      10.000000
+25\%      20.500000
+50\%      39.000000
+75\%      48.000000
+max      53.000000
+dtype: float64
+
+    \end{Verbatim}
+
+    That brought us down to 75 countries, all with at least 10 non-na
+observations. Much much better.
+
+Now we just have to make sure that every country remaining has at least
+one data point available before 1978 and at least one after 1978 so we
+will be able to calculate pre- and post-tamoxifen averages:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{n+nb}{print}\PY{p}{(}\PY{p}{(}\PY{n}{bcancer}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{1977}\PY{p}{]}\PY{o}{.}\PY{n}{notna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+              \PY{p}{(}\PY{n}{bcancer}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{1979}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{notna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+23 0
+
+    \end{Verbatim}
+
+    Looks like 23 of our remaining countries don't have any data prior to
+1978, so we'll have to remove those too:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{n}{bcancer} \PY{o}{=} \PY{n}{bcancer}\PY{p}{[}\PY{n}{bcancer}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{1977}\PY{p}{]}\PY{o}{.}\PY{n}{notna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{bcancer}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}70}]:} (52, 53)
+\end{Verbatim}
+            
+    This gave us an almost perfectly square dataframe, how nice! We're
+almost there now.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}151}]:} \PY{c+c1}{\PYZsh{} Create group labels}
+          \PY{n}{bcancer} \PY{o}{=} \PY{n}{bcancer}\PY{o}{.}\PY{n}{T}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{float}\PY{p}{)}
+          \PY{n}{bcancer}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{1978}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{drug}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pre}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{bcancer}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+m+mi}{1978}\PY{p}{:}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{drug}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{post}\PY{l+s+s1}{\PYZsq{}}
+          
+          \PY{c+c1}{\PYZsh{} take a look at the means by group to see if our operations worked}
+          \PY{n}{allstats} \PY{o}{=} \PY{n}{bcancer}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{drug}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+          \PY{n}{allstats}\PY{o}{.}\PY{n}{unstack}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}151}]:} geo  drug
+          arg  post    20.538400
+               pre     19.538333
+          aus  post    19.462800
+               pre     19.716429
+          aut  post    20.573200
+               pre     17.441304
+          bgr  post    14.946400
+               pre     10.582857
+          blz  post     6.295789
+               pre      5.422000
+          dtype: float64
+\end{Verbatim}
+            
+    From here, we now have what we need to perform the appropriate
+statistical analysis to determine whether or not the mean mortality rate
+in the 'post-treatment' years is different from the mortality rate prior
+to the treatment's approval.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}179}]:} \PY{n}{allstats}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{post}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{rot}\PY{o}{=}\PY{l+m+mi}{40}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{14}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}179}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1cdb8df7da0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    At first glance, there doesn't seem to be a noticable change between the
+years prior to and after the introduction of the treatment, for better
+or for worse. Such analysis conducted on the aggregate global means,
+would only expose large, obvious changes, and we don't see that here.
+Analysis on a per-country basis would be more informative, and would
+also be more suitable for exposing smaller but still statistically
+significant shifts.
+
+For our final step, we'll limit our data to that from the United States.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}180}]:} \PY{n}{usa\PYZus{}bc} \PY{o}{=} \PY{n}{bcancer}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{usa}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{drug}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          \PY{n}{usa\PYZus{}bc}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{drug}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}180}]:} geo    usa                                                         
+               count       mean       std    min     25\%    50\%    75\%    max
+          drug                                                               
+          post  25.0  20.753200  1.988764  16.65  19.570  21.86  22.29  22.60
+          pre   28.0  21.170714  0.605615  20.27  20.675  21.08  21.62  22.27
+\end{Verbatim}
+            
+    \subsubsection{Conclusions}\label{conclusions}
+
+In the United States, we do actually see a decrease in the average
+breast-cancer mortality rate in the years following the introduction of
+the drug. However, we also see an increase in variance, including a
+minimum value of 16.65 in post treatment years which could possibly be
+an anomalous outlier.
+
+More sophisticated tests exist than a simple groupwise comparison of
+means, but such tests are beyond the scope of this exercise. Our broad
+scan of the data is not powerful enough to determine statistical
+significance, but these numbers alone are enough to suggest that,
+practically speaking, the drug tamoxifen did not affect breast cancer
+mortality rates.
+
+What can we conclude from this? We can conclude that there are more
+questions to be asked! 1) Perhaps the purpose of the drug is to improve
+quality of life in those suffering from breast cancer? If so, we
+shouldn't expect to see changes in mortality rate. 2) Perhaps the drug
+was approved in 1978, but doctors didn't start using it until later? If
+so, our grouping would be incorrect. 3) Perhaps this particular
+indicator simply isn't very interesting from a data analyst's point of
+view? (based on what we saw here... I'm afraid that may be the case).
+
+Anyway, thank you for joining me in exploring a new dataset!!
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
